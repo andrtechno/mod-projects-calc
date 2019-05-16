@@ -1,4 +1,4 @@
-git add README.md<?php
+<?php
 
 namespace app\modules\projectscalc\components;
 use Yii;

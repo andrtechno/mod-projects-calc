@@ -1,0 +1,21 @@
+{
+    "name": "panix/mod-projects-calc",
+    "description": "Projects calc module",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PIXELION CMS",
+            "email": "dev@pixelion.com.ua",
+            "homepage": "https://pixelion.com.ua"
+        }
+    ],
+    "require": {
+        "phpoffice/phpword": "^0.16.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "panix\\mod\\projectscalc\\": ""
+        }
+    }
+}
