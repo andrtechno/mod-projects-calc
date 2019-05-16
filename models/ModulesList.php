@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\projectscalc\models;
+namespace panix\mod\projectscalc\models;
 
 use Yii;
 use panix\engine\Html;
 use panix\engine\behaviors\TranslateBehavior;
-use app\modules\projectscalc\models\translate\ModulesListTranslate;
+use panix\mod\projectscalc\models\translate\ModulesListTranslate;
 
 class ModulesList extends \panix\engine\db\ActiveRecord {
 

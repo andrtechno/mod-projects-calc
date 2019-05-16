@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\projectscalc\controllers\admin;
+namespace panix\mod\projectscalc\controllers\admin;
 
 use panix\engine\controllers\AdminController;
 use Yii;
-use app\modules\projectscalc\models\search\AgreementsSearch;
-use app\modules\projectscalc\models\Agreements;
+use panix\mod\projectscalc\models\search\AgreementsSearch;
+use panix\mod\projectscalc\models\Agreements;
 use Mpdf\Mpdf;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\Shared\Html as WordHtml;

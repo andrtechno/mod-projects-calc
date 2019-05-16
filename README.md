@@ -43,5 +43,5 @@ return [
 
 #### Migrate
 ```bash
-php yii migrate --migrationPath=vendor/panix/mod-shop/migrations
+php yii migrate --migrationPath=vendor/panix/mod-projects-calc/migrations
 ```

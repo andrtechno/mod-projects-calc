@@ -1,9 +1,9 @@
 <?php
 use yii\helpers\Html;
 use panix\engine\bootstrap\ActiveForm;
-use app\modules\projectscalc\models\ProjectsCalc;
+use panix\mod\projectscalc\models\ProjectsCalc;
 use yii\helpers\ArrayHelper;
-use app\modules\projectscalc\models\AgreementsRedaction;
+use panix\mod\projectscalc\models\AgreementsRedaction;
 ?>
 <?php
 $form = ActiveForm::begin([

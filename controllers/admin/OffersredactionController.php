@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\projectscalc\controllers\admin;
+namespace panix\mod\projectscalc\controllers\admin;
 
 use Yii;
-use app\modules\projectscalc\models\OffersRedaction;
-use app\modules\projectscalc\models\search\OffersRedactionSearch;
+use panix\mod\projectscalc\models\OffersRedaction;
+use panix\mod\projectscalc\models\search\OffersRedactionSearch;
 
 class OffersredactionController extends \panix\engine\controllers\AdminController {
 

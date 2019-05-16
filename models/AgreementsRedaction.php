@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\projectscalc\models;
+namespace panix\mod\projectscalc\models;
 
 
 use Yii;
 use yii\helpers\ArrayHelper;
 use panix\engine\behaviors\TranslateBehavior;
-use app\modules\projectscalc\models\translate\AgreementsRedactionTranslate;
-use app\modules\projectscalc\models\search\AgreementsRedactionSearch;
+use panix\mod\projectscalc\models\translate\AgreementsRedactionTranslate;
+use panix\mod\projectscalc\models\search\AgreementsRedactionSearch;
 use panix\engine\jui\DatePicker;
 
 class AgreementsRedaction extends \panix\engine\db\ActiveRecord

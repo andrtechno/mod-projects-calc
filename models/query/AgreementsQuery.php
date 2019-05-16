@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\projectscalc\models\query;
+namespace panix\mod\projectscalc\models\query;
 
 use panix\engine\traits\DefaultQueryTrait;
 

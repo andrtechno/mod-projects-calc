@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use panix\engine\bootstrap\ActiveForm;
 use panix\ext\tinymce\TinyMce;
 use yii\helpers\ArrayHelper;
-use app\modules\projectscalc\models\AgreementsRedaction;
+use panix\mod\projectscalc\models\AgreementsRedaction;
 
 
 $form = ActiveForm::begin([

@@ -1,7 +1,7 @@
 <?php
 
 use panix\ext\tinymce\TinyMce;
-use app\modules\projectscalc\components\ProjectHelper;
+use panix\mod\projectscalc\components\ProjectHelper;
 
 echo $form->field($model, 'title')->textInput(['maxlength' => 255]);
 echo $form->field($model, 'type_id')->dropdownlist(ProjectHelper::siteTypeList());

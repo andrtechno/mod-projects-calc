@@ -1,14 +1,14 @@
 <?php
 
-namespace app\modules\projectscalc\models;
+namespace panix\mod\projectscalc\models;
 
 use panix\engine\jui\DatePicker;
 use Yii;
 use panix\engine\CMS;
 use panix\engine\Html;
 use panix\engine\db\ActiveRecord;
-use app\modules\projectscalc\components\ProjectHelper;
-use app\modules\projectscalc\models\search\OffersSearch;
+use panix\mod\projectscalc\components\ProjectHelper;
+use panix\mod\projectscalc\models\search\OffersSearch;
 
 class Offers extends ActiveRecord {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\projectscalc\models\translate;
+namespace panix\mod\projectscalc\models\translate;
 
 use yii\db\ActiveRecord;
 

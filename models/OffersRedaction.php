@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\projectscalc\models;
+namespace panix\mod\projectscalc\models;
 
 
-use app\modules\projectscalc\models\search\OffersRedactionSearch;
+use panix\mod\projectscalc\models\search\OffersRedactionSearch;
 use Yii;
 use panix\engine\db\ActiveRecord;
 use panix\engine\behaviors\TranslateBehavior;
-use app\modules\projectscalc\models\translate\OffersRedactionTranslate;
+use panix\mod\projectscalc\models\translate\OffersRedactionTranslate;
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
 

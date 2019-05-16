@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\projectscalc\models\translate;
+namespace panix\mod\projectscalc\models\translate;
 class ProjectsCalcTranslate extends \yii\db\ActiveRecord {
 
     public static function tableName() {

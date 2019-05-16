@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\projectscalc;
+namespace panix\mod\projectscalc;
 
 use panix\engine\WebModule;
 use Yii;

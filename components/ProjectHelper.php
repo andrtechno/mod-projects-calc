@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\projectscalc\components;
+namespace panix\mod\projectscalc\components;
 use Yii;
 use yii\base\Exception;
 use yii\helpers\Json;

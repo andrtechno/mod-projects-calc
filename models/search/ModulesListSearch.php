@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\projectscalc\models\search;
+namespace panix\mod\projectscalc\models\search;
 
 use Yii;
 use yii\base\Model;
 use panix\engine\data\ActiveDataProvider;
-use app\modules\projectscalc\models\ModulesList;
+use panix\mod\projectscalc\models\ModulesList;
 
 class ModulesListSearch extends ModulesList {
 

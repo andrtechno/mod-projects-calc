@@ -1,12 +1,12 @@
 <?php
 
-namespace app\modules\projectscalc\models;
+namespace panix\mod\projectscalc\models;
 
-use app\modules\projectscalc\models\translate\AgreementsRedactionTranslate;
+use panix\mod\projectscalc\models\translate\AgreementsRedactionTranslate;
 use panix\engine\behaviors\TranslateBehavior;
 use Yii;
 use panix\engine\Html;
-use app\modules\projectscalc\components\ProjectHelper;
+use panix\mod\projectscalc\components\ProjectHelper;
 
 class Agreements extends \panix\engine\db\ActiveRecord {
 

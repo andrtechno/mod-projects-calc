@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\projectscalc\models;
+namespace panix\mod\projectscalc\models;
 
 class ProjectsModules extends \yii\db\ActiveRecord {
 

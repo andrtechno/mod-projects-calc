@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\projectscalc\models\ModulesList;
+use panix\mod\projectscalc\models\ModulesList;
 
 $checked = array();
 $fix = (false) ? 'disabled="disabled"' : '';

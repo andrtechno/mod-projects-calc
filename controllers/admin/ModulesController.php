@@ -1,9 +1,9 @@
 <?php
-namespace app\modules\projectscalc\controllers\admin;
+namespace panix\mod\projectscalc\controllers\admin;
 
 use Yii;
-use app\modules\projectscalc\models\ModulesList;
-use app\modules\projectscalc\models\search\ModulesListSearch;
+use panix\mod\projectscalc\models\ModulesList;
+use panix\mod\projectscalc\models\search\ModulesListSearch;
 use Mpdf\Mpdf;
 
 

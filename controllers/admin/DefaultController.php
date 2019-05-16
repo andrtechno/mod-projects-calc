@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\projectscalc\controllers\admin;
+namespace panix\mod\projectscalc\controllers\admin;
 
 use Yii;
-use app\modules\projectscalc\models\ProjectsCalc;
-use app\modules\projectscalc\models\search\ProjectsCalcSearch;
+use panix\mod\projectscalc\models\ProjectsCalc;
+use panix\mod\projectscalc\models\search\ProjectsCalcSearch;
 
 class DefaultController extends \panix\engine\controllers\AdminController {
 

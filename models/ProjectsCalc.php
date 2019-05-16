@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\projectscalc\models;
+namespace panix\mod\projectscalc\models;
 
 use Yii;
 use panix\engine\behaviors\TranslateBehavior;
-use app\modules\projectscalc\components\ProjectHelper;
-use app\modules\projectscalc\models\translate\ProjectsCalcTranslate;
-use app\modules\projectscalc\models\ModulesList;
-use app\modules\projectscalc\models\ProjectsAddons;
+use panix\mod\projectscalc\components\ProjectHelper;
+use panix\mod\projectscalc\models\translate\ProjectsCalcTranslate;
+use panix\mod\projectscalc\models\ModulesList;
+use panix\mod\projectscalc\models\ProjectsAddons;
 
 class ProjectsCalc extends \panix\engine\db\ActiveRecord {
 

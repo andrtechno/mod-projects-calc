@@ -1,9 +1,9 @@
 <?php
 
 use panix\engine\db\Migration;
-use app\modules\projectscalc\models\Offers;
-use app\modules\projectscalc\models\OffersRedaction;
-use app\modules\projectscalc\models\translate\OffersRedactionTranslate;
+use panix\mod\projectscalc\models\Offers;
+use panix\mod\projectscalc\models\OffersRedaction;
+use panix\mod\projectscalc\models\translate\OffersRedactionTranslate;
 
 class m171205_104211_offers extends Migration {
 
