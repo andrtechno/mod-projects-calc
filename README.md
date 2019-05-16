@@ -1,8 +1,6 @@
-Module RBAC provides a web interface for advanced access control and includes following features:
+# Module projects calc
 
-- Allows CRUD operations for roles, permissions, rules
-- Allows to assign multiple roles or permissions to the user
-- Allows to create console migrations
+Module for PIXELION CMS
 
 [![Latest Stable Version](https://poser.pugx.org/panix/mod-projects-calc/v/stable)](https://packagist.org/packages/panix/mod-projects-calc)
 [![Latest Unstable Version](https://poser.pugx.org/panix/mod-projects-calc/v/unstable)](https://packagist.org/packages/panix/mod-projects-calc)
