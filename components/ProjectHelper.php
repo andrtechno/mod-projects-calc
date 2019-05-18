@@ -38,13 +38,6 @@ class ProjectHelper {
     }
     public static function privatBank() {
 
-        $lang = Yii::$app->language;
-        $curl = Yii::$app->curl;
-
-
-
-
-
         $client = new Client(['baseUrl' => 'https://api.privatbank.ua/p24api/pubinfo?coursid=5&json=true&exchange=true']);
         $response = $client->createRequest()
             ->setFormat(Client::FORMAT_JSON)
@@ -60,7 +53,6 @@ class ProjectHelper {
         } else {
             return false;
         }
-
     }
 
     public static function num2str($num) {
