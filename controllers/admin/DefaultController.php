@@ -13,7 +13,7 @@ class DefaultController extends \panix\engine\controllers\AdminController {
         $this->pageName = Yii::t('projectscalc/default', 'MODULE_NAME');
         $this->buttons = [
             [
-                'icon' => 'icon-add',
+                'icon' => 'add',
                 'label' => Yii::t('projectscalc/default', 'CREATE_BTN'),
                 'url' => ['create'],
                 'options' => ['class' => 'btn btn-success']

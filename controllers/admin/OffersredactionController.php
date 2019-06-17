@@ -33,7 +33,7 @@ class OffersredactionController extends \panix\engine\controllers\AdminControlle
         $this->pageName = Yii::t('projectscalc/default', 'OFFERS_REDACTION');
         $this->buttons = [
             [
-                'icon' => 'icon-add',
+                'icon' => 'add',
                 'label' => Yii::t('projectscalc/default', 'CREATE_BTN'),
                 'url' => ['create'],
                 'options' => ['class' => 'btn btn-success']

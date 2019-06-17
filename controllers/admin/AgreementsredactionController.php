@@ -34,7 +34,7 @@ class AgreementsredactionController extends \panix\engine\controllers\AdminContr
         $this->pageName = Yii::t('projectscalc/default', 'AGREEMENTS_REDACTION');
         $this->buttons = [
             [
-                'icon' => 'icon-add',
+                'icon' => 'add',
                 'label' => Yii::t('projectscalc/default', 'CREATE_BTN'),
                 'url' => ['create'],
                 'options' => ['class' => 'btn btn-success']

@@ -141,7 +141,7 @@ class AgreementsController extends AdminController
         $this->pageName = Yii::t('projectscalc/default', 'AGREEMENTS');
         $this->buttons = [
             [
-                'icon' => 'icon-add',
+                'icon' => 'add',
                 'label' => Yii::t('projectscalc/default', 'CREATE_BTN'),
                 'url' => ['create'],
                 'options' => ['class' => 'btn btn-success']
