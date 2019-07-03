@@ -15,7 +15,7 @@ class ModulesListSearch extends ModulesList {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['customer_name','date_create'], 'safe'],
+            [['customer_name','created_at'], 'safe'],
         ];
     }
 
@@ -65,8 +65,8 @@ class ModulesListSearch extends ModulesList {
     public static function getSort() {
         $sort = new \yii\data\Sort([
             'attributes' => [
-                'date_create',
-                'date_update',
+                'created_at',
+                'updated_at',
 
             ],
         ]);

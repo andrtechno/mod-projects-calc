@@ -15,7 +15,7 @@ class ProjectsCalcSearch extends ProjectsCalc {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['full_text','date_create','title'], 'safe'],
+            [['full_text','created_at','title'], 'safe'],
         ];
     }
 
@@ -65,8 +65,8 @@ class ProjectsCalcSearch extends ProjectsCalc {
     public static function getSort() {
         $sort = new \yii\data\Sort([
             'attributes' => [
-                'date_create',
-                'date_update',
+                'created_at',
+                'updated_at',
 
             ],
         ]);

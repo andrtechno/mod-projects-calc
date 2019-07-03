@@ -4,6 +4,10 @@ use panix\engine\bootstrap\ActiveForm;
 use panix\mod\projectscalc\models\ProjectsCalc;
 use yii\helpers\ArrayHelper;
 use panix\mod\projectscalc\models\AgreementsRedaction;
+
+/**
+ * @var \panix\mod\projectscalc\models\Offers $model
+ */
 ?>
 <?php
 $form = ActiveForm::begin([

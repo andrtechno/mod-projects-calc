@@ -5,8 +5,10 @@ namespace panix\mod\projectscalc\controllers\admin;
 use Yii;
 use panix\mod\projectscalc\models\AgreementsRedaction;
 use panix\mod\projectscalc\models\search\AgreementsRedactionSearch;
+use panix\engine\controllers\AdminController;
 
-class AgreementsredactionController extends \panix\engine\controllers\AdminController {
+class AgreementsRedactionController extends AdminController
+{
 
     public $tpl_keys = array(
         '{agreement_id}',
@@ -22,7 +24,8 @@ class AgreementsredactionController extends \panix\engine\controllers\AdminContr
         '{price_original_text}'
     );
 
-    public function actions() {
+    public function actions()
+    {
         return array(
             'delete' => array(
                 'class' => 'ext.adminList.actions.DeleteAction',
@@ -30,7 +33,8 @@ class AgreementsredactionController extends \panix\engine\controllers\AdminContr
         );
     }
 
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $this->pageName = Yii::t('projectscalc/default', 'AGREEMENTS_REDACTION');
         $this->buttons = [
             [
@@ -56,8 +60,8 @@ class AgreementsredactionController extends \panix\engine\controllers\AdminContr
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-                    'dataProvider' => $dataProvider,
-                    'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -65,15 +69,10 @@ class AgreementsredactionController extends \panix\engine\controllers\AdminContr
      * Create or update new page
      * @param boolean $id
      */
-    public function actionUpdate($id = false) {
-        if ($id === true) {
-            $model = new Agreements;
-        } else {
-            $model = $this->findModel($id);
-        }
+    public function actionUpdate($id = false)
+    {
 
-
-
+        $model = AgreementsRedaction::findModel($id);
 
         $this->pageName = ($model->isNewRecord) ? 'New' : $model->getAgreementName();
 
@@ -94,29 +93,19 @@ class AgreementsredactionController extends \panix\engine\controllers\AdminContr
             $this->pageName
         ];
 
-
-
-
+        $isNew = $model->isNewRecord;
         $post = Yii::$app->request->post();
         if ($model->load($post) && $model->validate()) {
             $model->save();
-            if (Yii::$app->request->post('redirect', 1)) {
-                Yii::$app->session->setFlash('success', \Yii::t('app', 'SUCCESS_CREATE'));
-                return Yii::$app->getResponse()->redirect(['/admin/projectscalc/agreementsredaction']);
-            }
+            Yii::$app->session->setFlash('success', Yii::t('app', ($isNew) ? 'SUCCESS_CREATE' : 'SUCCESS_UPDATE'));
+            $redirect = (isset($post['redirect'])) ? $post['redirect'] : Yii::$app->request->url;
+            if (!Yii::$app->request->isAjax)
+                return $this->redirect($redirect);
         }
         return $this->render('update', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
 
-    protected function findModel($id) {
-        $model = new AgreementsRedaction;
-        if (($model = $model::findOne($id)) !== null) {
-            return $model;
-        } else {
-            $this->error404();
-        }
-    }
 
 }

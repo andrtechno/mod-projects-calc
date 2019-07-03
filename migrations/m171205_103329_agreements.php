@@ -15,15 +15,15 @@ class m171205_103329_agreements extends \panix\engine\db\Migration {
             'date' => 'date NOT NULL',
             'programming_days' => $this->integer(),
             'layouts_days ' => $this->integer(),
-            'date_create' => $this->timestamp()->defaultValue(null),
-            'date_update' => $this->timestamp()
+            'created_at' => $this->timestamp(),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')
         ]);
 
         $this->createTable('{{%agreements__redaction}}', [
             'id' => $this->primaryKey(),
             'performer' => $this->string(255),
-            'date_create' => $this->timestamp()->defaultValue(null),
-            'date_update' => $this->timestamp()
+            'created_at' => $this->timestamp(),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')
         ]);
 
         $this->createTable('{{%agreements__redaction_translate}}', [

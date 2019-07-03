@@ -65,8 +65,8 @@ class AgreementsRedactionSearch extends AgreementsRedaction {
     public static function getSort() {
         $sort = new \yii\data\Sort([
             'attributes' => [
-                'date_create',
-                'date_update',
+                'created_at',
+                'updated_at',
 
             ],
         ]);

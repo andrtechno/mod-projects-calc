@@ -2,7 +2,6 @@
 
 namespace panix\mod\projectscalc\controllers\admin;
 
-
 use Yii;
 use panix\engine\Html;
 use panix\engine\controllers\AdminController;
@@ -12,22 +11,8 @@ use Mpdf\Mpdf;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\Shared\Html as WordHtml;
 
-
 class OffersController extends AdminController
 {
-
-    public function actionView($id)
-    {
-        $model = Offers::model()
-            ->with('redaction')
-            ->findByPk($id);
-        if ($model) {
-            if ($model->redaction) {
-                echo $model->renderOffer();
-            }
-        }
-        die;
-    }
 
 
     public function actionDoc($id)
@@ -46,9 +31,7 @@ class OffersController extends AdminController
         //$section->addTextBreak(1);
 
 
-
         WordHtml::addHtml($section, $model->renderOffer());
-
 
 
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
@@ -131,11 +114,8 @@ class OffersController extends AdminController
      */
     public function actionUpdate($id = false)
     {
-        if ($id === true) {
-            $model = new Offers;
-        } else {
-            $model = $this->findModel($id);
-        }
+
+        $model = Offers::findModel($id);
 
 
         /* $isNewRecord = ($model->isNewRecord) ? true : false;
@@ -146,14 +126,14 @@ class OffersController extends AdminController
 
           $this->pageName = ($model->isNewRecord) ? $model::t('PAGE_TITLE', 0) : $model::t('PAGE_TITLE', 1);
          */
-
+        $isNew = $model->isNewRecord;
         $post = Yii::$app->request->post();
         if ($model->load($post) && $model->validate()) {
             $model->save();
-            if (Yii::$app->request->post('redirect', 1)) {
-                Yii::$app->session->setFlash('success', \Yii::t('app', 'SUCCESS_CREATE'));
-                return $this->redirect(['/admin/projectscalc/offers']);
-            }
+            Yii::$app->session->setFlash('success', Yii::t('app', ($isNew) ? 'SUCCESS_CREATE' : 'SUCCESS_UPDATE'));
+            $redirect = (isset($post['redirect'])) ? $post['redirect'] : Yii::$app->request->url;
+            if (!Yii::$app->request->isAjax)
+                return $this->redirect($redirect);
         }
         return $this->render('update', ['model' => $model]);
     }
@@ -169,13 +149,4 @@ class OffersController extends AdminController
         ];
     }
 
-    protected function findModel($id)
-    {
-        $model = new Offers;
-        if (($model = $model::findOne($id)) !== null) {
-            return $model;
-        } else {
-            $this->error404();
-        }
-    }
 }

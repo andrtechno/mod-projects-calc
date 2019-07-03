@@ -52,12 +52,12 @@ $this->registerJs("$('[data-toggle=\"tooltip\"]').tooltip();");
 
 
 
-    <div class="col-xs-12 col-sm-12 col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
+    <div class="col-sm-12 col-md-3">
+        <div class="card">
+            <div class="card-header">
                 <h3 class="panel-title"><?= Html::encode($this->context->pageName) ?></h3>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <div id="content_manual">
                     <div class="form-horizontal">
                         <?php

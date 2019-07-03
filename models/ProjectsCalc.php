@@ -6,15 +6,22 @@ use Yii;
 use panix\engine\behaviors\TranslateBehavior;
 use panix\mod\projectscalc\components\ProjectHelper;
 use panix\mod\projectscalc\models\translate\ProjectsCalcTranslate;
-use panix\mod\projectscalc\models\ModulesList;
-use panix\mod\projectscalc\models\ProjectsAddons;
+use panix\engine\db\ActiveRecord;
 
-class ProjectsCalc extends \panix\engine\db\ActiveRecord {
+/**
+ * Class ProjectsCalc
+ * @package panix\mod\projectscalc\models
+ *
+ * @property string $course
+ */
+class ProjectsCalc extends ActiveRecord
+{
 
     const MODULE_ID = 'projectscalc';
     const route = '/admin/projectscalc/default';
 
-    public function setAddons() {
+    public function setAddons()
+    {
         $dontDelete = [];
         if (Yii::$app->request->post('addons')) {
             foreach (Yii::$app->request->post('addons') as $key => $option) {
@@ -37,7 +44,7 @@ class ProjectsCalc extends \panix\engine\db\ActiveRecord {
 
         if (sizeof($dontDelete)) {
             $optionsToDelete = ProjectsAddons::deleteAll(
-                            ['AND', 'project_id=:id', ['NOT IN', 'id', $dontDelete]], [':id' => $this->id]);
+                ['AND', 'project_id=:id', ['NOT IN', 'id', $dontDelete]], [':id' => $this->id]);
         } else {
             $optionsToDelete = ProjectsAddons::deleteAll('project_id=:id', [':id' => $this->id]);
         }
@@ -47,15 +54,16 @@ class ProjectsCalc extends \panix\engine\db\ActiveRecord {
         // }
     }
 
-    public function setCategories(array $categories) {
+    public function setCategories(array $categories)
+    {
         $dontDelete = array();
         foreach ($categories as $c) {
             $count = ProjectsModules::find()
-                    ->where(['mod_id' => $c, 'project_id' => $this->id])
-                    ->count();
+                ->where(['mod_id' => $c, 'project_id' => $this->id])
+                ->count();
             if ($count == 0) {
                 $record = new ProjectsModules;
-                $record->mod_id = (int) $c;
+                $record->mod_id = (int)$c;
                 $record->project_id = $this->id;
                 $record->save(false);
             }
@@ -65,90 +73,51 @@ class ProjectsCalc extends \panix\engine\db\ActiveRecord {
         // Delete not used relations
         if (sizeof($dontDelete) > 0) {
             ProjectsModules::deleteAll(
-                    ['AND', 'project_id=:id', ['NOT IN', 'mod_id', $dontDelete]], [':id' => $this->id]);
+                ['AND', 'project_id=:id', ['NOT IN', 'mod_id', $dontDelete]], [':id' => $this->id]);
         } else {
             // Delete all relations
             ProjectsModules::deleteAll('project_id=:id', [':id' => $this->id]);
         }
     }
 
-    public function getForm() {
-        Yii::import('ext.bootstrap.selectinput.SelectInput');
-        Yii::app()->controller->widget('ext.tinymce.TinymceWidget');
-
-        return array(
-            'attributes' => array(
-                'id' => __CLASS__,
-                'class' => 'form-horizontal',
-            ),
-            'showErrorSummary' => true,
-            'elements' => array(
-                'content' => array(
-                    'type' => 'form',
-                    'title' => self::t('TAB_CONTENT'),
-                    'elements' => array(
-                        'title' => array('type' => 'text'),
-                        'type_id' => array(
-                            'type' => 'SelectInput',
-                            'data' => ProjectHelper::siteTypeList()
-                        ),
-                        'price_makeup' => array('type' => 'text'),
-                        'price_prototype' => array('type' => 'text'),
-                        'price_layouts' => array('type' => 'text'),
-                        'full_text' => array(
-                            'type' => 'textarea',
-                            'class' => 'editor'
-                        ),
-                    ),
-                ),
-            ),
-            'buttons' => array(
-                'submit' => array(
-                    'type' => 'submit',
-                    'class' => 'btn btn-success',
-                    'label' => $this->isNewRecord ? Yii::t('app', 'CREATE', 0) : Yii::t('app', 'SAVE')
-                )
-            )
-        );
-    }
-
-    public function getGridColumns() {
+    public function getGridColumns()
+    {
         return [
-            [
+            'title' => [
                 'attribute' => 'title',
                 //'type' => 'raw',
                 'contentOptions' => array('class' => 'text-left'),
-            // 'value' => '$data->title',
+                // 'value' => '$data->title',
             ],
-            [
+            'total_price' => [
                 'attribute' => 'total_price',
                 // 'type' => 'html',
                 'contentOptions' => array('class' => 'text-center'),
-            // 'value' => '$data->total_price',
+                // 'value' => '$data->total_price',
             ],
-            [
+            'user_id' => [
                 'attribute' => 'user_id',
                 //'type' => 'raw',
                 //'value' => 'CMS::userLink($data->user)',
                 'contentOptions' => array('class' => 'text-center')
             ],
-            [
-                'attribute' => 'date_create',
+            'created_at' => [
+                'attribute' => 'created_at',
                 'format' => 'raw',
                 'filter' => \yii\jui\DatePicker::widget([
                     'model' => new ProjectsCalc(),
-                    'attribute' => 'date_create',
+                    'attribute' => 'created_at',
                     'dateFormat' => 'yyyy-MM-dd',
                     'options' => ['class' => 'form-control']
                 ]),
                 'contentOptions' => ['class' => 'text-center'],
-                'value' => function($model) {
-                    return Yii::$app->formatter->asDatetime($model->date_create, 'php:d D Y H:i:s');
+                'value' => function ($model) {
+                    return Yii::$app->formatter->asDatetime($model->created_at, 'php:d D Y H:i:s');
                 }
             ],
-            [
-                'attribute' => 'date_update',
-            //'value' => 'CMS::date($data->date_update)',
+            'updated_at' => [
+                'attribute' => 'updated_at',
+                //'value' => 'CMS::date($data->date_update)',
             ],
             'DEFAULT_CONTROL' => [
                 'class' => 'panix\engine\grid\columns\ActionColumn',
@@ -162,11 +131,13 @@ class ProjectsCalc extends \panix\engine\db\ActiveRecord {
     /**
      * @return string the associated database table name
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return '{{%projects_calc}}';
     }
 
-    public function beforeSave($insert) {
+    public function beforeSave($insert)
+    {
         $total = 0;
         $bank = ProjectHelper::privatBank();
         if ($this->price_layouts > 0)
@@ -193,7 +164,8 @@ class ProjectsCalc extends \panix\engine\db\ActiveRecord {
     /**
      * @return array validation rules for model attributes.
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['title', 'type_id', 'price_makeup', 'price_layouts', 'price_prototype'], 'required'],
             [['full_text'], 'string'],
@@ -204,48 +176,55 @@ class ProjectsCalc extends \panix\engine\db\ActiveRecord {
     /**
      * @return array relational rules.
      */
-    public function relations2() {
+    public function relations2()
+    {
         return array(
             //'translate' => array(self::HAS_ONE, $this->translateModelName, 'object_id'),
             'mods' => array(self::HAS_MANY, 'ProjectsModulesTranslate', 'project_id'),
             'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-                //'modulesList' => array(self::HAS_MANY, 'ProjectsModules', 'project_id'),
-                // 'modules' => array(self::HAS_MANY, 'ModulesList', array('mod_id' => 'id'), 'through' => 'modulesList'),
+            //'modulesList' => array(self::HAS_MANY, 'ProjectsModules', 'project_id'),
+            // 'modules' => array(self::HAS_MANY, 'ModulesList', array('mod_id' => 'id'), 'through' => 'modulesList'),
         );
     }
 
-    public function getModulesList() {
+    public function getModulesList()
+    {
         return $this->hasMany(ProjectsModules::className(), ['project_id' => 'id']);
     }
 
-    public function getModules() {
+    public function getModules()
+    {
         return $this->hasMany(ModulesList::className(), ['id' => 'mod_id'])->via('modulesList');
     }
 
-    public function getAddons() {
+    public function getAddons()
+    {
         return $this->hasMany(ProjectsAddons::className(), ['project_id' => 'id']);
     }
 
-    public function transactions() {
+    public function transactions()
+    {
         return [
             self::SCENARIO_DEFAULT => self::OP_INSERT | self::OP_UPDATE,
         ];
     }
 
-    public function getTranslations() {
+    public function getTranslations()
+    {
         return $this->hasMany(ProjectsCalcTranslate::className(), ['object_id' => 'id']);
     }
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return \yii\helpers\ArrayHelper::merge([
-                    'translate' => [
-                        'class' => TranslateBehavior::className(),
-                        'translationAttributes' => [
-                            'title',
-                            'full_text',
-                        ]
-                    ],
-                        ], parent::behaviors());
+            'translate' => [
+                'class' => TranslateBehavior::className(),
+                'translationAttributes' => [
+                    'title',
+                    'full_text',
+                ]
+            ],
+        ], parent::behaviors());
     }
 
 }

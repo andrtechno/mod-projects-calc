@@ -49,12 +49,12 @@ class Agreements extends \panix\engine\db\ActiveRecord {
                 'contentOptions' => array('class' => 'text-left'),
                 //'value' => '$data->gridName',
             ],
-            'date_create'=>[
-                'attribute' => 'date_create',
+            'create_at'=>[
+                'attribute' => 'create_at',
                 //'value' => 'CMS::date($data->date_create)',
             ],
-            'date_update'=>[
-                'attribute' => 'date_update',
+            'update_at'=>[
+                'attribute' => 'update_at',
                 //'value' => 'CMS::date($data->date_update)',
             ],
             'DEFAULT_CONTROL' => [
@@ -98,7 +98,7 @@ class Agreements extends \panix\engine\db\ActiveRecord {
             //array('redaction_id, date, customer_firstname, customer_lastname, customer_middlename, customer_passport, customer_address, customer_phone, programming_days, layouts_days, calc_id, customer_text, customer_is', 'required'),
             //array('customer_text, customer_name', 'type', 'type' => 'string'),
             array('redaction_id, date, programming_days, layouts_days, calc_id, customer_is', 'required'),
-            array('date_create', 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'),
+            array('create_at', 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'),
             array('date', 'date', 'format' => 'yyyy-MM-dd'),
             array('layouts_days, programming_days, customer_is', 'numerical', 'integerOnly' => true),
             array('price', 'numerical'),
@@ -133,7 +133,7 @@ class Agreements extends \panix\engine\db\ActiveRecord {
         if ($this->date) {
             $date = date('d', strtotime($this->date)) . ' ' . Yii::t('app', date('F', strtotime($this->date)), 4) . ' ' . date('Y', strtotime($this->date));
         } else {
-            $date = '"___"_________ ' . date('Y', strtotime($this->date_create));
+            $date = '"___"_________ ' . date('Y', strtotime($this->created_at));
         }
         return $date;
     }
@@ -143,7 +143,7 @@ class Agreements extends \panix\engine\db\ActiveRecord {
 
         $replace = array(
             "{agreement_id}" => $this->id,
-            "{current_year}" => date('Y', strtotime($this->date_create)),
+            "{current_year}" => date('Y', strtotime($this->created_at)),
             "{performer}" => $this->redaction->performer, //Исполнитель
             "{customer_fullname}" => $this->customer_name, //Отчество Заказчика
             "{customer_text}" => $this->customer_text, //Отчество Заказчика

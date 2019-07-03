@@ -4,17 +4,17 @@ namespace panix\mod\projectscalc\models;
 
 
 use Yii;
-use yii\helpers\ArrayHelper;
-use panix\engine\behaviors\TranslateBehavior;
 use panix\mod\projectscalc\models\translate\AgreementsRedactionTranslate;
 use panix\mod\projectscalc\models\search\AgreementsRedactionSearch;
 use panix\engine\jui\DatePicker;
+use panix\engine\db\ActiveRecord;
 
-class AgreementsRedaction extends \panix\engine\db\ActiveRecord
+class AgreementsRedaction extends ActiveRecord
 {
 
     const MODULE_ID = 'projectscalc';
     const route = '/admin/projectscalc/agreementsredaction';
+    public $translationClass = AgreementsRedactionTranslate::class;
 
     public function getGridColumns()
     {
@@ -23,36 +23,36 @@ class AgreementsRedaction extends \panix\engine\db\ActiveRecord
                 'attribute' => 'id',
                 'format' => 'raw',
                 'contentOptions' => array('class' => 'text-left'),
-                'value' => function ($model) {
+                'value' => function (self $model) {
                     return $model->getAgreementName();
                 }
             ],
             [
-                'attribute' => 'date_create',
+                'attribute' => 'created_at',
                 'format' => 'raw',
                 'filter' => DatePicker::widget([
                     'model' => new AgreementsRedactionSearch(),
-                    'attribute' => 'date_create',
+                    'attribute' => 'created_at',
                     'dateFormat' => 'yyyy-MM-dd',
                     'options' => ['class' => 'form-control']
                 ]),
                 'contentOptions' => ['class' => 'text-center'],
-                'value' => function ($model) {
-                    return Yii::$app->formatter->asDatetime($model->date_create, 'php:d D Y H:i:s');
+                'value' => function (self $model) {
+                    return Yii::$app->formatter->asDatetime($model->created_at, 'php:d D Y H:i:s');
                 }
             ],
             [
-                'attribute' => 'date_update',
+                'attribute' => 'updated_at',
                 'format' => 'raw',
                 'filter' => DatePicker::widget([
                     'model' => new AgreementsRedactionSearch(),
-                    'attribute' => 'date_update',
+                    'attribute' => 'updated_at',
                     'dateFormat' => 'yyyy-MM-dd',
                     'options' => ['class' => 'form-control']
                 ]),
                 'contentOptions' => ['class' => 'text-center'],
                 'value' => function ($model) {
-                    return Yii::$app->formatter->asDatetime($model->date_update, 'php:d D Y H:i:s');
+                    return Yii::$app->formatter->asDatetime($model->updated_at, 'php:d D Y H:i:s');
                 }
             ],
             'DEFAULT_CONTROL' => [
@@ -67,11 +67,6 @@ class AgreementsRedaction extends \panix\engine\db\ActiveRecord
     public function getAgreementName()
     {
         return 'Редакция договора №' . $this->id;
-    }
-
-    public function getTranslations()
-    {
-        return $this->hasMany(AgreementsRedactionTranslate::className(), ['object_id' => 'id']);
     }
 
     /**
@@ -98,18 +93,6 @@ class AgreementsRedaction extends \panix\engine\db\ActiveRecord
         return [
             self::SCENARIO_DEFAULT => self::OP_INSERT | self::OP_UPDATE,
         ];
-    }
-
-    public function behaviors()
-    {
-        return ArrayHelper::merge([
-            'translate' => [
-                'class' => TranslateBehavior::className(),
-                'translationAttributes' => [
-                    'text'
-                ]
-            ],
-        ], parent::behaviors());
     }
 
 }

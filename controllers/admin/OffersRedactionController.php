@@ -5,8 +5,10 @@ namespace panix\mod\projectscalc\controllers\admin;
 use Yii;
 use panix\mod\projectscalc\models\OffersRedaction;
 use panix\mod\projectscalc\models\search\OffersRedactionSearch;
+use panix\engine\controllers\AdminController;
 
-class OffersredactionController extends \panix\engine\controllers\AdminController {
+class OffersRedactionController extends AdminController
+{
 
     public $tpl_keys = array(
         '{offer_id}',
@@ -20,7 +22,8 @@ class OffersredactionController extends \panix\engine\controllers\AdminControlle
         '{type}'
     );
 
-    public function actions() {
+    public function actions()
+    {
         return array(
             'delete' => array(
                 'class' => 'ext.adminList.actions.DeleteAction',
@@ -28,7 +31,8 @@ class OffersredactionController extends \panix\engine\controllers\AdminControlle
         );
     }
 
-    public function actionIndex() {
+    public function actionIndex()
+    {
 
         $this->pageName = Yii::t('projectscalc/default', 'OFFERS_REDACTION');
         $this->buttons = [
@@ -55,14 +59,15 @@ class OffersredactionController extends \panix\engine\controllers\AdminControlle
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-                    'dataProvider' => $dataProvider,
-                    'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
-    public function actionPrint($id) {
+    public function actionPrint($id)
+    {
         $model = OffersRedaction::model()
-                ->findByPk($id);
+            ->findByPk($id);
 
         Yii::setPathOfAlias('Mpdf', Yii::getPathOfAlias('vendor.mpdf.mpdf.src'));
 
@@ -78,17 +83,16 @@ class OffersredactionController extends \panix\engine\controllers\AdminControlle
      * Create or update new page
      * @param boolean $id
      */
-    public function actionUpdate($id = false) {
-        if ($id === true) {
-            $model = new OffersRedaction;
-         } else {
-        $model = $this->findModel($id);
-         }
+    public function actionUpdate($id = false)
+    {
 
+        $model = OffersRedaction::findModel($id);
 
+//$est = Yii::$app->db->createCommand('SELECT * FROM `cms_offers_redaction`')->queryAll();
+//print_r($est);die;
+        $isNew = $model->isNewRecord;
 
-
-        $this->pageName = ($model->isNewRecord) ? 'NEW' : $model->getOfferName();
+        $this->pageName = ($isNew) ? 'NEW' : $model->getOfferName();
         $this->breadcrumbs = [
             [
                 'label' => Yii::t('projectscalc/default', 'MODULE_NAME'),
@@ -104,23 +108,15 @@ class OffersredactionController extends \panix\engine\controllers\AdminControlle
         $post = Yii::$app->request->post();
         if ($model->load($post) && $model->validate()) {
             $model->save();
-            if (Yii::$app->request->post('redirect', 1)) {
-                Yii::$app->session->setFlash('success', \Yii::t('app', 'SUCCESS_CREATE'));
-                return Yii::$app->getResponse()->redirect(['/admin/projectscalc/offersredaction']);
-            }
+            Yii::$app->session->setFlash('success', Yii::t('app', ($isNew) ? 'SUCCESS_CREATE' : 'SUCCESS_UPDATE'));
+            $redirect = (isset($post['redirect'])) ? $post['redirect'] : Yii::$app->request->url;
+            if (!Yii::$app->request->isAjax)
+                return $this->redirect($redirect);
         }
         return $this->render('update', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
 
-    protected function findModel($id) {
-        $model = new OffersRedaction;
-        if (($model = $model::findOne($id)) !== null) {
-            return $model;
-        } else {
-            $this->error404();
-        }
-    }
 
 }

@@ -2,9 +2,14 @@
 
 namespace panix\mod\projectscalc\models\translate;
 
-class AgreementsRedactionTranslate extends \yii\db\ActiveRecord {
+use yii\db\ActiveRecord;
 
-    public static function tableName() {
+class AgreementsRedactionTranslate extends ActiveRecord
+{
+    public static $translationAttributes = ['text'];
+
+    public static function tableName()
+    {
         return '{{%agreements__redaction_translate}}';
     }
 

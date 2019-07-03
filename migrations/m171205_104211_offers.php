@@ -12,14 +12,14 @@ class m171205_104211_offers extends Migration {
             'id' => $this->primaryKey()->unsigned(),
             'redaction_id' => $this->integer()->unsigned(),
             'calc_id' => $this->integer()->unsigned(),
-            'date_create' => $this->timestamp()->defaultValue(null),
-            'date_update' => $this->timestamp()
+            'created_at' => $this->timestamp(),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')
         ]);
 
         $this->createTable(OffersRedaction::tableName(), [
             'id' => $this->primaryKey()->unsigned(),
-            'date_create' => $this->timestamp()->defaultValue(null),
-            'date_update' => $this->timestamp()
+            'created_at' => $this->timestamp(),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')
         ]);
 
         $this->createTable(OffersRedactionTranslate::tableName(), [
