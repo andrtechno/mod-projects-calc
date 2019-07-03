@@ -88,8 +88,6 @@ class OffersRedactionController extends AdminController
 
         $model = OffersRedaction::findModel($id);
 
-//$est = Yii::$app->db->createCommand('SELECT * FROM `cms_offers_redaction`')->queryAll();
-//print_r($est);die;
         $isNew = $model->isNewRecord;
 
         $this->pageName = ($isNew) ? 'NEW' : $model->getOfferName();

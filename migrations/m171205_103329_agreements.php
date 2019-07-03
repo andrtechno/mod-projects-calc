@@ -15,8 +15,8 @@ class m171205_103329_agreements extends \panix\engine\db\Migration {
             'date' => 'date NOT NULL',
             'programming_days' => $this->integer(),
             'layouts_days ' => $this->integer(),
-            'created_at' => $this->timestamp(),
-            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')
+            'created_at' => $this->integer(11),
+            'updated_at' => $this->integer(11)
         ]);
 
         $this->createTable('{{%agreements__redaction}}', [
