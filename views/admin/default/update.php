@@ -13,16 +13,9 @@ use yii\helpers\ArrayHelper;
             <div class="panel-body">
 
 <?php
-$form = ActiveForm::begin([
-            'id' => strtolower(basename(get_class($model))) . '-form',
-            'options' => [
-                'class' => 'form-horizontal',
-            ]
-        ]);
-
+$form = ActiveForm::begin();
 
 $tabs = [];
-
 
 $tabs[] = [
     'label' => $model::t('TAB_MAIN'),
