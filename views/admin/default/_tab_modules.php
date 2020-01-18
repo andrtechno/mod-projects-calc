@@ -16,7 +16,7 @@ $list = ModulesList::getTypeList();
         <th class="text-center">Название</th>
         <th class="text-center">Тип</th>
         <th class="text-center">Цена</th>
-        <th class="text-center"><?= Yii::t('app', 'OPTIONS'); ?></th>
+        <th class="text-center"><?= Yii::t('app/default', 'OPTIONS'); ?></th>
     </tr>
     <?php foreach (ModulesList::find()->all() as $name => $data) { ?>
         <?php

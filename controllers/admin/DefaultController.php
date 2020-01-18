@@ -61,7 +61,7 @@ class DefaultController extends \panix\engine\controllers\AdminController {
             $model->setAddons();
             $model->save();
             if (Yii::$app->request->post('redirect', 1)) {
-                Yii::$app->session->setFlash('success', \Yii::t('app', 'SUCCESS_CREATE'));
+                Yii::$app->session->setFlash('success', \Yii::t('app/default', 'SUCCESS_CREATE'));
                // return Yii::$app->getResponse()->redirect(['/admin/projectscalc']);
             }
         }
@@ -73,7 +73,7 @@ class DefaultController extends \panix\engine\controllers\AdminController {
     public function getAddonsMenu() {
         return [
             [
-                'label' => Yii::t('app', 'Модули'),
+                'label' => Yii::t('app/default', 'Модули'),
                 'url' => ['/admin/projectscalc/modules'],
             //'icon' => 'flaticon-settings',
             ]

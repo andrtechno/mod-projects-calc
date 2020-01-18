@@ -131,7 +131,7 @@ class Agreements extends \panix\engine\db\ActiveRecord {
 
     public function getDataRender(){
         if ($this->date) {
-            $date = date('d', strtotime($this->date)) . ' ' . Yii::t('app', date('F', strtotime($this->date)), 4) . ' ' . date('Y', strtotime($this->date));
+            $date = date('d', strtotime($this->date)) . ' ' . Yii::t('app/default', date('F', strtotime($this->date)), 4) . ' ' . date('Y', strtotime($this->date));
         } else {
             $date = '"___"_________ ' . date('Y', strtotime($this->created_at));
         }

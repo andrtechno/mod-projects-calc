@@ -178,7 +178,7 @@ class AgreementsController extends AdminController
         if ($model->load($post) && $model->validate()) {
             $model->save();
             if (Yii::$app->request->post('redirect', 1)) {
-                Yii::$app->session->setFlash('success', \Yii::t('app', 'SUCCESS_CREATE'));
+                Yii::$app->session->setFlash('success', \Yii::t('app/default', 'SUCCESS_CREATE'));
                 return $this->redirect(['/admin/projectscalc/agreements']);
             }
         }
